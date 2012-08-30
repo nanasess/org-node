@@ -17,20 +17,20 @@ app.engine('md', function(path, options, fn) {
     fs.readFile(views + '/index.ejs', 'utf8', function(err, data) {
         if (err) return fn(err);
         tpl = data;
-    });
-    
-    fs.readFile(path, 'utf8', function(err, data) {
-        if (err) return fn(err);
-        try {
-            var html = md(data);
-            html = html.replace(/\{([^}]+)\}/g, function(_, name) {
-                return options[name] || '';
-            });
-            var out = tpl.replace(/<%= md %>/g, html);
-            fn(null, out);
-        } catch(err) {
-            fn(err);
-        }
+
+        fs.readFile(path, 'utf8', function(err, data) {
+            if (err) return fn(err);
+            try {
+                var html = md(data);
+                html = html.replace(/\{([^}]+)\}/g, function(_, name) {
+                    return options[name] || '';
+                });
+                var out = tpl.replace(/<%= md %>/g, html);
+                fn(null, out);
+            } catch(err) {
+                fn(err);
+            }
+        });
     });
 });
 
@@ -47,15 +47,12 @@ app.configure(function(){
   app.use(app.router);
   app.use(require('stylus').middleware(__dirname + '/public'));
   app.use(express.static(path.join(__dirname, 'public')));
-
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
-/*
 
-*/
 app.get('/', function(req, res) {
     res.render('index', {title : 'Markdown Example'});
 });
