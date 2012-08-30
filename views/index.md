@@ -26,6 +26,7 @@ In addition to the changes in the previous section, certain references are auto-
 * \#Num: #1
 * User/#Num: mojombo#1
 * User/Project#Num: mojombo/god#1
+* [go to index2](index2)
 
 These are dangerous goodies though, and we need to make sure email addresses don't get mangled:
 
@@ -158,6 +159,7 @@ Crazy linking action
 
 I get 10 times more traffic from [Google] [1] than from
 [Yahoo] [2] or [MSN] [3].
+
 
   [1]: http://google.com/        "Google"
   [2]: http://search.yahoo.com/  "Yahoo Search"

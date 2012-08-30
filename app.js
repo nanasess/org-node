@@ -22,9 +22,12 @@ app.engine('md', function(path, options, fn) {
             if (err) return fn(err);
             try {
                 var html = md(data);
+                var title = html.match(/<h1>([^<]*)<\/h1>/i);
                 html = html.replace(/\{([^}]+)\}/g, function(_, name) {
                     return options[name] || '';
                 });
+
+                tpl = tpl.replace(/<%= title %>/g, title[1]);
                 var out = tpl.replace(/<%= md %>/g, html);
                 fn(null, out);
             } catch(err) {
@@ -54,11 +57,15 @@ app.configure('development', function(){
 });
 
 app.get('/', function(req, res) {
-    res.render('index', {title : 'Markdown Example'});
+    res.render('index');
+});
+
+app.get(/^\/([\w]+)$/g, function(req, res) {
+    res.render(req.params[0]);
 });
 
 app.get('/fail', function(req, res) {
-    res.render('missing', {title: 'markdown Example'});
+    res.render('missing');
 });
 
 http.createServer(app).listen(app.get('port'), function(){
