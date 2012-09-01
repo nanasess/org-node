@@ -26,7 +26,7 @@ In addition to the changes in the previous section, certain references are auto-
 * \#Num: #1
 * User/#Num: mojombo#1
 * User/Project#Num: mojombo/god#1
-* [go to index2](index2)
+* [go to index2](/entry/index2)
 
 These are dangerous goodies though, and we need to make sure email addresses don't get mangled:
 

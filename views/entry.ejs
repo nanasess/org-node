@@ -8,7 +8,6 @@
     <![endif]-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="/js/<%= script %>"></script>
   </head>
   <body>
     <header>
@@ -16,6 +15,10 @@
 	<a href="https://github.com/nanasess/org-node"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
     </header>
     <div id="content">
+        <article>
+	  <%- content %>
+          <time pubdate='pubdate' datetime='<%= datetime %>'><%= pubdate %></time>
+	</article>
     </div>
     <footer>
         <p><small>Powered by <a href="https://github.com/nanasess/org-node">org-node</a></small></p>
