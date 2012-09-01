@@ -9,6 +9,7 @@
     "express": "3.x",
     "ejs": "*",
     "stylus": "*",
-    "github-flavored-markdown": "*"
+    "github-flavored-markdown": "*",
+    "moment": "*"
   }
 }

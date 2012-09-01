@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset='utf-8' />
     <title><%= title %></title>
+    <!--[if IE]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <%= md %>
+    <header>
+        <h1><a href="/">org-node</a></h1>
+    </header>
+    <article>
+        <%= md %>
+        <%= time %>
+    </article>
+    <footer>
+        <p><small>Powered by <a href="https://github.com/nanasess/org-node">org-node</a></small></p>
+    </footer>
   </body>
 </html>

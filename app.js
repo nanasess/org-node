@@ -1,13 +1,13 @@
-
 /**
  * Module dependencies.
  */
 var express = require('express')
-  , routes = require('./routes')
+  //, routes = require('./routes')
   , http = require('http')
   , path = require('path')
   , md = require("github-flavored-markdown").parse
-  , fs = require("fs");
+  , fs = require("fs")
+  , moment = require("moment");
 
 var app = express();
 
@@ -21,15 +21,23 @@ app.engine('md', function(path, options, fn) {
         fs.readFile(path, 'utf8', function(err, data) {
             if (err) return fn(err);
             try {
-                var html = md(data);
-                var title = html.match(/<h1>([^<]*)<\/h1>/i);
-                html = html.replace(/\{([^}]+)\}/g, function(_, name) {
-                    return options[name] || '';
+                var ctime = '';
+                fs.stat(path, function(err, stats) {
+                    if (err) return fn(err);
+                    ctime = stats.ctime;
+                    moment().local();
+                    var m = moment(ctime);
+                    var html = md(data);
+                    var time = "<time pubdate='pubdate' datetime='" + m.format() + "'>" + m.format('YYYY/M/D hh:mm:ss Z') + "</time>";
+                    var title = html.match(/<h1>([^<]*)<\/h1>/i);
+                    html = html.replace(/\{([^}]+)\}/g, function(_, name) {
+                        return options[name] || '';
+                    });
+                    tpl = tpl.replace(/<%= time %>/g, time);
+                    tpl = tpl.replace(/<%= title %>/g, title[1]);
+                    var out = tpl.replace(/<%= md %>/g, html);
+                    fn(null, out);
                 });
-
-                tpl = tpl.replace(/<%= title %>/g, title[1]);
-                var out = tpl.replace(/<%= md %>/g, html);
-                fn(null, out);
             } catch(err) {
                 fn(err);
             }
