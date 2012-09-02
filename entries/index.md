@@ -152,7 +152,8 @@ Table for two
 Syntax highlighting
 -------------------
 
-<div data-gist-id=1294732><a href="http://gist.github.com/1294732">your_gist_filename on GitHub Gist</a></div>
+<div 
+data-gist-id=1294732><a href="http://gist.github.com/1294732">your_gist_filename on GitHub Gist</a></div>
 
 Crazy linking action
 --------------------

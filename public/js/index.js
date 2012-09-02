@@ -19,6 +19,8 @@ $(function() {
                                      var $article = $('<article id=' + data.name + '/>')
                                          .append(data.html)
                                          .hide();
+                                     var $h1 = $article.find('h1');
+                                     $h1.html('<a href="/entry/' + data.name + '">' + $h1.text() + '</a>');
                                      var $time = $('<time />')
                                          .attr({pubdate: 'pubdate',
                                                 datetime: data.datetime})
