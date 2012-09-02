@@ -152,7 +152,7 @@ Table for two
 Syntax highlighting
 -------------------
 
-<script src="https://gist.github.com/1294732.js?file=csv2tsv.pl"></script>
+<div data-gist-id=1294732><a href="http://gist.github.com/1294732">your_gist_filename on GitHub Gist</a></div>
 
 Crazy linking action
 --------------------

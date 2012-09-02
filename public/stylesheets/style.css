@@ -158,3 +158,6 @@ time {
 small {
   font-size: 80%;
 }
+div#content {
+  min-height: 400px;
+}

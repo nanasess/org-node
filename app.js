@@ -82,12 +82,13 @@ app.get('/entry/:content', function(req, res) {
             if (req.xhr) {
                 res.type('json');
                 var result = {};
+                result.name = entry.name;
                 result.html = entry.html();
                 result.datetime = entry.datetime();
                 result.pubdate = entry.pubdate();
                 res.json(result);
             } else {
-                res.render('entry.ejs', {title: entry.title(), content: entry.html(), datetime: entry.datetime(), pubdate: entry.pubdate()});
+                res.render('entry.ejs', {title: entry.title(), content: entry.html(), datetime: entry.datetime(), pubdate: entry.pubdate(), script: 'entry.js'});
             }
         });
     });

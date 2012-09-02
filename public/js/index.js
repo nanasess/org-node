@@ -1,4 +1,6 @@
 $(function() {
+      var footer = $('footer').hide();
+      $('head').append('<link rel="stylesheet" type="text/css" media="screen" href="http://gist.github.com/stylesheets/gist/embed.css" />');
       $.ajax({
                  type: 'GET',
                  dataType: 'json',
@@ -14,17 +16,24 @@ $(function() {
                                  url: '/entry/' + entry,
                                  cache: false,
                                  success: function(data, textStatus, jqXHR) {
-                                     var $article = $('<article />').append(data.html);
+                                     var $article = $('<article id=' + data.name + '/>')
+                                         .append(data.html)
+                                         .hide();
                                      var $time = $('<time />')
                                          .attr({pubdate: 'pubdate',
                                                 datetime: data.datetime})
                                          .text(data.pubdate);
                                      $article.append($time);
-                                     $('#content').append($article);
+                                     $article.appendTo('#content')
+                                         .fadeIn('slow');
+                                     $('div[data-gist-id]').embedGist();
                                  }
                              }
                          );
                      }
+                 },
+                 complete: function(textStatus, jqXHR) {
+                     footer.fadeIn();  
                  }
              }
       );
