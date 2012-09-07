@@ -15,3 +15,4 @@ node_modules
 npm-debug.log
 .c9revisions
 .settings
+.settings.xml

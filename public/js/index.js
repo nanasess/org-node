@@ -1,6 +1,5 @@
 $(function() {
       var footer = $('footer').hide();
-      $('head').append('<link rel="stylesheet" type="text/css" media="screen" href="http://gist.github.com/stylesheets/gist/embed.css" />');
       $.ajax({
                  type: 'GET',
                  dataType: 'json',
