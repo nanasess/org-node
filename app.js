@@ -16,6 +16,7 @@ app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('entries', __dirname + '/entries');
   app.set('main_title', 'org-node');
+  app.set('timezone', 'Asia/Tokyo');
   app.engine('.md', require('ejs').__express);
   app.set('view engine', 'md');
   app.use(express.favicon());

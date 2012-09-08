@@ -1,7 +1,8 @@
 var path = require('path')
   , md = require("github-flavored-markdown").parse
   , fs = require("fs")
-  , moment = require("moment");
+  , moment = require("moment")
+  , time = require("time");
 
 
 /**
@@ -56,11 +57,12 @@ exports.entry = function(req, res) {
             var entry = new Entry(req.params.content, stats.ctime, data);
             if (req.xhr) {
                 res.type('json');
-                var result = {};
-                result.name = entry.name;
-                result.html = entry.html();
-                result.datetime = entry.datetime();
-                result.pubdate = entry.pubdate();
+                var result = {
+                    name: entry.name,
+                    html: entry.html(),
+                    datetime: entry.datetime(),
+                    pubdate: entry.pubdate()
+                };
                 res.json(result);
             } else {
                 res.render('entry.ejs', {
@@ -76,10 +78,11 @@ exports.entry = function(req, res) {
 };
 
 function Entry(name, ctime, source) {
-    var parsed = false;
-    var content = null;
-    moment().local();
-    this.m = moment(ctime);
+    var parsed = false,
+    content = null,
+    d = new time.Date(ctime, module.parent.exports.get('timezone'));
+
+    this.m = moment(d);
     this.name = name;
     this.ctime = ctime;
     this.source = source;

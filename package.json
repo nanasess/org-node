@@ -10,6 +10,7 @@
     "ejs": "*",
     "stylus": "*",
     "github-flavored-markdown": "*",
-    "moment": "*"
+    "moment": "*",
+    "time": "*"
   }
 }
