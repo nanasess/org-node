@@ -79,37 +79,40 @@ exports.entry = function(req, res) {
 
 function Entry(name, ctime, source) {
     var parsed = false,
-    content = null,
-    d = new time.Date(ctime, module.parent.exports.get('timezone'));
+        content = null,
+        d = new time.Date(ctime, module.parent.exports.get('timezone'));
 
     this.m = moment(d);
     this.name = name;
     this.ctime = ctime;
     this.source = source;
-    this.title = function() {
-        if (source) {
-            if (!parsed) {
-                content = this.html();
-                var title = content.match(/<h1>([^<]*)<\/h1>/i);
+}
+
+Entry.prototype = {
+    title : function() {
+        if (this.source) {
+            if (!this.parsed) {
+                this.content = this.html();
+                var title = this.content.match(/<h1>([^<]*)<\/h1>/i);
                 return title[1];
             }
         }
         return null;
-    };
-    this.unix = function() {
-        return m.unix();
-    };
-    this.html = function() {
-        if (source && !parsed) {
-            content = md(this.source);
-            parsed = true;
+    },
+    unix : function() {
+        return this.m.unix();
+    },
+    html : function() {
+        if (this.source && !this.parsed) {
+            this.content = md(this.source);
+            this.parsed = true;
         }
-        return content;
-    };
-    this.pubdate = function() {
+        return this.content;
+    },
+    pubdate : function() {
         return this.m.format('YYYY/M/D hh:mm:ss ZZ');
-    };
-    this.datetime = function() {
+    },
+    datetime : function() {
         return this.m.format();
-    };
-}
+    }
+};
